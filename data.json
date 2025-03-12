@@ -1,0 +1,163 @@
+{
+    "Mark Zuckerberg": {
+        "link": "https://en.wikipedia.org/wiki/Mark_Zuckerberg",
+        "alma_matters": [
+            "/wiki/Harvard_University"
+        ],
+        "institutions": [],
+        "rank": "3",
+        "net_worth": "$209.4 B",
+        "age": "40",
+        "source": "Facebook",
+        "country": "United States"
+    },
+    "Larry Ellison": {
+        "link": "https://en.wikipedia.org/wiki/Larry_Ellison",
+        "alma_matters": [
+            "/wiki/University_of_Illinois_at_Urbana-Champaign",
+            "/wiki/University_of_Chicago"
+        ],
+        "institutions": [],
+        "rank": "4",
+        "net_worth": "$178.5 B",
+        "age": "80",
+        "source": "Oracle",
+        "country": "United States"
+    },
+    "Elon Musk": {
+        "link": "https://en.wikipedia.org/wiki/Elon_Musk",
+        "alma_matters": [
+            "/wiki/University_of_Pennsylvania"
+        ],
+        "institutions": [],
+        "rank": "1",
+        "net_worth": "$324.3 B",
+        "age": "53",
+        "source": "Tesla, SpaceX",
+        "country": "United States"
+    },
+    "Jeff Bezos": {
+        "link": "https://en.wikipedia.org/wiki/Jeff_Bezos",
+        "alma_matters": [
+            "/wiki/Princeton_University"
+        ],
+        "institutions": [],
+        "rank": "2",
+        "net_worth": "$212.7 B",
+        "age": "61",
+        "source": "Amazon",
+        "country": "United States"
+    },
+    "Bernard Arnault & family": {
+        "link": "https://en.wikipedia.org/wiki/Bernard_Arnault",
+        "alma_matters": [
+            "/wiki/Ecole_polytechnique"
+        ],
+        "institutions": [],
+        "rank": "5",
+        "net_worth": "$174.2 B",
+        "age": "76",
+        "source": "LVMH",
+        "country": "France"
+    },
+    "Warren Buffett": {
+        "link": "https://en.wikipedia.org/wiki/Warren_Buffett",
+        "alma_matters": [
+            "/wiki/University_of_Pennsylvania",
+            "/wiki/University_of_Nebraska-Lincoln",
+            "/wiki/Columbia_University"
+        ],
+        "institutions": [],
+        "rank": "6",
+        "net_worth": "$154.8 B",
+        "age": "94",
+        "source": "Berkshire Hathaway",
+        "country": "United States"
+    },
+    "Larry Page": {
+        "link": "https://en.wikipedia.org/wiki/Larry_Page",
+        "alma_matters": [
+            "/wiki/University_of_Michigan",
+            "/wiki/Stanford_University"
+        ],
+        "institutions": [],
+        "rank": "7",
+        "net_worth": "$136.7 B",
+        "age": "51",
+        "source": "Google",
+        "country": "United States"
+    },
+    "Sergey Brin": {
+        "link": "https://en.wikipedia.org/wiki/Sergey_Brin",
+        "alma_matters": [
+            "/wiki/University_of_Maryland%252C_College_Park",
+            "/wiki/Stanford_University"
+        ],
+        "institutions": [],
+        "rank": "8",
+        "net_worth": "$130.9 B",
+        "age": "51",
+        "source": "Google",
+        "country": "United States"
+    },
+    "Amancio Ortega": {
+        "link": "https://en.wikipedia.org/wiki/Amancio_Ortega",
+        "alma_matters": [],
+        "institutions": [],
+        "rank": "9",
+        "net_worth": "$120.1 B",
+        "age": "88",
+        "source": "Zara",
+        "country": "Spain"
+    },
+    "Steve Ballmer": {
+        "link": "https://en.wikipedia.org/wiki/Steve_Ballmer",
+        "alma_matters": [
+            "/wiki/Harvard_University",
+            "/wiki/Stanford_University"
+        ],
+        "institutions": [],
+        "rank": "10",
+        "net_worth": "$115.2 B",
+        "age": "68",
+        "source": "Microsoft",
+        "country": "United States"
+    },
+    "Bill Gates": {
+        "link": "https://en.wikipedia.org/wiki/Bill_Gates",
+        "alma_matters": [
+            "/wiki/Harvard_University"
+        ],
+        "institutions": [],
+        "rank": "11",
+        "net_worth": "$106.5 B",
+        "age": "69",
+        "source": "Microsoft",
+        "country": "United States"
+    },
+    "Rob Walton": {
+        "link": "https://en.wikipedia.org/wiki/S._Robson_Walton",
+        "alma_matters": [
+            "/wiki/University_of_Arkansas",
+            "/wiki/Columbia_Law_School"
+        ],
+        "institutions": [],
+        "rank": "12",
+        "net_worth": "$106.1 B",
+        "age": "80",
+        "source": "Walmart",
+        "country": "United States"
+    },
+    "Jim Walton": {
+        "link": "https://en.wikipedia.org/wiki/Jim_Walton",
+        "alma_matters": [
+            "/wiki/University_of_Arkansas"
+        ],
+        "institutions": [],
+        "rank": "13",
+        "net_worth": "$104.9 B",
+        "age": "76",
+        "source": "Walmart",
+        "country": "United States"
+    }
+}
