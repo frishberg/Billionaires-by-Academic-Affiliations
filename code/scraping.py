@@ -49,7 +49,6 @@ def special_exceptions(source) :
 #this method scrapes the wikipedia page of the given link and then tries to scrape the listings under Education and Institutions.  It's definitely not perfect but through my testing, it seems basically flawless.  Should work well enough so that the list is short enough so I can go through to verify manually
 def scrape_wiki_data(link) :
     alma_matters = [] #universities they attended
-    institutions = [] #universities they worked at
     category = "" #physics, chemistry, etc.
     year = "" #year they won the nobel prize
 
@@ -80,34 +79,10 @@ def scrape_wiki_data(link) :
         pass
     if (len(alma_matters) == 0) :
         print("No alma matters found for " + link)
-    try :
-        temp_source = source[source.index('Institutions</th>'):]
-        temp_source = temp_source[:temp_source.index("</tr>")]
-        while("href" in temp_source) :
-            temp_source = temp_source[temp_source.index('href="')+6:]
-            institution = temp_source[:temp_source.index('"')]
-            if ("/wiki/" in institution and non_exclude_list(institution)) :
-                institution = institution
-                if (institution not in institutions) :
-                    institutions.append(clean_up(institution))
-    except :
-        pass
-    try :
-        temp_source = source[source.index('Institution</th>'):]
-        temp_source = temp_source[:temp_source.index("</tr>")]
-        while("href" in temp_source) :
-            temp_source = temp_source[temp_source.index('href="')+6:]
-            institution = temp_source[:temp_source.index('"')]
-            if ("/wiki/" in institution and non_exclude_list(institution)) :
-                institution = institution
-                if (institution not in institutions) :
-                    institutions.append(clean_up(institution))
-    except :
-        pass
     
     #getting the category and year
     
-    return alma_matters, institutions
+    return alma_matters
 
 #takes in a name, like Wilhelm R%C3%B6ntgen and returns Wilhelm Rontgen.  Gets rid of annoying unicode characters
 def clean_up(s) :
@@ -125,9 +100,6 @@ def generate_list_of_universities() :
         for alma_matter in data[name]["alma_matters"] :
             if alma_matter not in universities :
                 universities.append(alma_matter)
-        for institution in data[name]["institutions"] :
-            if institution not in universities :
-                universities.append(institution)
     f = open("code/universities.txt", "w", encoding="utf-8")
     for university in universities :
         f.write('"' + university + '",\n')
@@ -149,6 +121,9 @@ def fix_mistakes() :
     data = data.replace("/wiki/Booth_School_of_Business", "/wiki/University_of_Chicago")
     data = data.replace("/wiki/Stanford_University_School_of_Medicine", "/wiki/Stanford_University")
     data = data.replace("/wiki/Simon_Business_School", "/wiki/University_of_Rochester")
+    data = data.replace("/wiki/Harvard_Business_School", "/wiki/Harvard_University")
+    data = data.replace("/wiki/Wharton_School_of_the_University_of_Pennsylvania", "/wiki/University_of_Pennsylvania")
+    data = data.replace("/wiki/Wharton_School", "/wiki/University_of_Pennsylvania")
     data = data.replace("/wiki/Samuel_Curtis_Johnson_Graduate_School_of_Management", "/wiki/Cornell_University")
     data = data.replace("/wiki/Olin_Business_School", "/wiki/Washington_University_in_St._Louis")
     data = data.replace("/wiki/Perelman_School_of_Medicine_at_the_University_of_Pennsylvania", "/wiki/University_of_Pennsylvania")
@@ -248,6 +223,7 @@ def fix_mistakes() :
     data = data.replace("/wiki/Worcester_College,_Oxford", "/wiki/University_of_Oxford")
     data = data.replace("/wiki/Oxford_University", "/wiki/University_of_Oxford")
     data = data.replace("/wiki/wiki/", "/wiki/")
+    data = data.replace("/wiki/America's_Top_Colleges", "")
     #edits
 
     data = data.replace("%27", "'")
@@ -261,19 +237,17 @@ def fix_mistakes() :
     f.write(data)
     f.close()
 
+options = Options()
+options.add_argument("--headless")  # Enable headless mode
+service = Service(GeckoDriverManager().install())
+
 def find_wiki_link(name):
-
-    # Setup Firefox WebDriver with headless mode
-    options = Options()
-    options.add_argument("--headless")  # Enable headless mode
-
-    service = Service(GeckoDriverManager().install())
     driver = webdriver.Firefox(service=service, options=options)
 
     try:
         driver.get("https://duckduckgo.com/")
         search = driver.find_element(By.NAME, "q")
-        search.send_keys(name + " wikipedia")
+        search.send_keys(name + " billionaire wikipedia")
         search.send_keys(Keys.RETURN)
 
         time.sleep(3)  # Allow time for search results to load
@@ -300,7 +274,7 @@ def has_it_been_done(name) :
     data = json.loads(f.read())
     f.close()
     for laureate in data :
-        if name == laureate :
+        if name == laureate or name.replace(" & family", "") == laureate :
             return True
     return False
 
@@ -317,30 +291,26 @@ def main() :
             print("Already done " + row[1])
             continue
         try :
-            time.sleep(60)
+            time.sleep(2)
             name = row[1]
             name = name.replace(" & family", "")
             link = find_wiki_link(name)
-            cur_alma_matters, cur_institutions = scrape_wiki_data(link)
+            cur_alma_matters = scrape_wiki_data(link)
             json_data[name] = {}
             json_data[name]["link"] = link
             json_data[name]["alma_matters"] = cur_alma_matters
-            json_data[name]["institutions"] = cur_institutions
             json_data[name]["rank"] = row[0]
             json_data[name]["net_worth"] = row[2]
             json_data[name]["age"] = row[4]
             json_data[name]["source"] = row[5]
             json_data[name]["country"] = row[6]
-            print(name + " went to " + str(cur_alma_matters) + " and worked at " + str(cur_institutions))
+            print(name + " went to " + str(cur_alma_matters))
             g = open("data.json", "w", encoding="utf-8")
             g.write(json.dumps(json_data, indent=4))
             g.close()
         except :
             name = row[1]
             print("\n\n\nFailed to get data for " + name + "\n\n\n")
-            h = open("failed.txt", "a", encoding="utf-8")
-            h.write(name + "\n")
-            h.close()
 
     f.close()
     f = open("data.json", "w", encoding="utf-8")
@@ -349,6 +319,6 @@ def main() :
 
 
 
-main() #generates data.json using the laureates.txt file
+#main() #generates data.json using the laureates.txt file
 fix_mistakes()
 generate_list_of_universities() #generates universities.txt

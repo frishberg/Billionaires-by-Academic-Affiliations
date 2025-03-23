@@ -33,3 +33,6 @@
 /wiki/Specialist_diploma
 /wiki/Candidate_of_Sciences
 /wiki/Juris_Doctor
+/wiki/BEng
+/wiki/MBA
+/wiki/M._B._A.
